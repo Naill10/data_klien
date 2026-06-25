@@ -90,6 +90,14 @@
                     class="w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 focus:border-brand-300 focus:outline-none focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90">{{ old('catatan') }}</textarea>
             </div>
 
+            {{-- Kategori --}}
+            <div class="sm:col-span-2">
+                <label class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400">Kategori</label>
+                <input type="text" name="kategori" value="{{ old('kategori') }}"
+                    placeholder="Kategori klien (opsional)"
+                    class="h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 text-sm text-gray-800 focus:border-brand-300 focus:outline-none focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90" />
+                    
+
         </div>
 
         <div class="mt-6 flex gap-3">

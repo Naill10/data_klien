@@ -72,6 +72,10 @@
             <p class="text-xs text-gray-500 dark:text-gray-400">Terakhir Diupdate</p>
             <p class="mt-1 font-medium text-gray-800 dark:text-white/90">{{ $klien->updated_at->format('d M Y, H:i') }}</p>
         </div>
+        <div>
+            <p class="text-xs text-gray-500 dark:text-gray-400">Kategori</p>
+            <p class="mt-1 font-medium text-gray-800 dark:text-white/90">{{ $klien->kategori ?? '-' }}</p>
+                
 
     </div>
 

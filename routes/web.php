@@ -24,14 +24,12 @@ Route::get('/ecommerce', function () {
 Route::middleware('auth')->group(function () {
 
     // Profile (bawaan Breeze)
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-
-    // Calendar
-    Route::get('/profile', function () {
-        return view('pages.profile', ['title' => 'Profile']);
-    })->name('profile');
+// Ganti ini
+Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+Route::put('/password', [App\Http\Controllers\Auth\PasswordController::class, 'update'])->name('password.update');
+  
     // Calendar
     Route::get('/calendar', function () {
         return view('pages.calender', ['title' => 'Calendar']);

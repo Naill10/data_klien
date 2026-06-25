@@ -11,6 +11,7 @@
         tr:nth-child(even) { background-color: #f9fafb; }
         .aktif { color: green; font-weight: bold; }
         .tidak-aktif { color: red; font-weight: bold; }
+        
     </style>
 </head>
 <body>
@@ -26,6 +27,7 @@
                 <th>Status</th>
                 <th>Tanggal</th>
                 <th>Alamat</th>
+                <th>Kategori</th>
             </tr>
         </thead>
         <tbody>
@@ -39,6 +41,7 @@
                 <td class="{{ $item->status === 'Aktif' ? 'aktif' : 'tidak-aktif' }}">{{ $item->status }}</td>
                 <td>{{ $item->tanggal_kerjasama ? \Carbon\Carbon::parse($item->tanggal_kerjasama)->format('d M Y') : '-' }}</td>
                 <td>{{ $item->alamat ?? '-' }}</td>
+                <td>{{ $item->kategori ?? '-' }}</td>
             </tr>
             @endforeach
         </tbody>

@@ -43,7 +43,9 @@ public function import(Request $request)
                 'tanggal_kerjasama' => !empty($row[5]) ? $row[5] : null,
                 'alamat'            => $row[6] ?? null,
                 'catatan'           => $row[7] ?? null,
+                  'kategori'          => $row[8] ?? null,
                 'user_id'           => auth()->id(),
+              
             ]);
             $berhasil++;
         } catch (\Exception $e) {
@@ -60,14 +62,14 @@ public function downloadTemplate()
     $spreadsheet = new Spreadsheet();
     $sheet = $spreadsheet->getActiveSheet();
 
-    // Header kolom
+    // Header kolom - tambah kategori
     $sheet->fromArray([
-        'nama_klien', 'nama_perusahaan', 'email', 'no_telpon', 'status', 'tanggal_kerjasama', 'alamat', 'catatan'
+        'nama_klien', 'nama_perusahaan', 'email', 'no_telpon', 'status', 'tanggal_kerjasama', 'alamat', 'catatan', 'kategori'
     ], null, 'A1');
 
     // Contoh data
     $sheet->fromArray([
-        'Pak Budi', 'PT Contoh Indonesia', 'budi@email.com', '08123456789', 'Aktif', '2024-01-01', 'Jakarta', 'Catatan contoh'
+        'Pak Budi', 'PT Contoh Indonesia', 'budi@email.com', '08123456789', 'Aktif', '2024-01-01', 'Jakarta', 'Catatan contoh', 'PERKEBUNAN'
     ], null, 'A2');
 
     $writer = new Xlsx($spreadsheet);
@@ -101,6 +103,7 @@ public function exportExcel()
             $item->tanggal_kerjasama ? \Carbon\Carbon::parse($item->tanggal_kerjasama)->format('d M Y') : '-',
             $item->alamat ?? '-',
             $item->catatan ?? '-',
+            $item->kategori ?? '-',
         ], null, 'A' . ($i + 2));
     }
 
@@ -130,7 +133,8 @@ public function index(Request $request)
         ->when($search, function ($query) use ($search) {
             $query->where('nama_klien', 'like', "%{$search}%")
                   ->orWhere('nama_perusahaan', 'like', "%{$search}%")
-                  ->orWhere('email', 'like', "%{$search}%");
+                  ->orWhere('email', 'like', "%{$search}%")
+                  ->orWhere('kategori', 'like', "%{$search}%");
         })->latest()->paginate(10);
 
     return view('pages.klien.index', compact('klien', 'search'));
@@ -148,6 +152,7 @@ public function store(Request $request)
     'status'            => 'required|in:Aktif,Tidak Aktif',
     'tanggal_kerjasama' => 'nullable|date_format:Y-m-d|after:1900-01-01|before:2100-01-01',
     'catatan'           => 'nullable|string',
+    'kategori'          => 'nullable|string|max:100',
 ]);
 
     Klien::create([
@@ -179,8 +184,9 @@ public function update(Request $request, Klien $klien)
     'no_telpon'         => 'nullable|string|max:20',
     'alamat'            => 'nullable|string',
     'status'            => 'required|in:Aktif,Tidak Aktif',
-    'tanggal_kerjasama' => 'nullable|date_format:Y-m-d|after:1900-01-01|before:2100-01-01', // ✅
+    'tanggal_kerjasama' => 'nullable|date_format:Y-m-d|after:1900-01-01|before:2100-01-01', 
     'catatan'           => 'nullable|string',
+    'kategori'          => 'nullable|string|max:100', 
 ]);
 
     $klien->update($validated);  // ✅ pakai variable-nya

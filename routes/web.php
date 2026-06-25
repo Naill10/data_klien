@@ -4,16 +4,16 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\KlienController;
 
-// Halaman utama
+// Halaman utama        
 Route::get('/', function () {
-    return view('sign in', ['title' => 'sign in']);
+    return redirect()->route('login');
 });
 
 Route::get('/dashboard', function () {
-    $totalKlien = \App\Models\Klien::count();
-    $klienAktif = \App\Models\Klien::where('status', 'Aktif')->count();
-    $klienTidakAktif = \App\Models\Klien::where('status', 'Tidak Aktif')->count();
-    $klienTerbaru = \App\Models\Klien::latest()->take(5)->get();
+    $totalKlien      = \App\Models\Klien::where('user_id', auth()->id())->count();
+    $klienAktif      = \App\Models\Klien::where('user_id', auth()->id())->where('status', 'Aktif')->count();
+    $klienTidakAktif = \App\Models\Klien::where('user_id', auth()->id())->where('status', 'Tidak Aktif')->count();
+    $klienTerbaru    = \App\Models\Klien::where('user_id', auth()->id())->latest()->take(5)->get();
 
     return view('dashboard', compact('totalKlien', 'klienAktif', 'klienTidakAktif', 'klienTerbaru'));
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -103,6 +103,14 @@ Route::get('/error-404', function () {
 })->name('error-404');
 
 //klien
-Route::resource('klien', App\Http\Controllers\KlienController::class);
+//klien - ✅ taruh semua SEBELUM resource
+Route::get('/klien/import-page', function () {
+    return view('pages.klien.import');
+})->middleware('auth')->name('klien.import.page');
+
+Route::get('/klien/import/template', [KlienController::class, 'downloadTemplate'])->name('klien.import.template')->middleware('auth');
+Route::post('/klien/import', [KlienController::class, 'import'])->name('klien.import')->middleware('auth');
+
+Route::resource('klien', App\Http\Controllers\KlienController::class); // ✅ resource PALING BAWAH
 
 require __DIR__.'/auth.php';

@@ -83,6 +83,10 @@
                                         Hapus
                                     </button>
                                 </form>
+                                <a href="{{ route('klien.show', $item->id) }}"
+                                            class="rounded-lg border bg-gray-50 border-gray-300 px-3 py-1.5 text-xs font-medium text-gray-700 ">
+                                            Detail
+                                        </a>
                             </div>
                         </td>
                     </tr>

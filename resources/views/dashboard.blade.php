@@ -59,7 +59,7 @@
                 <div class="h-2 rounded-full bg-green-500 transition-all duration-500"
                     style="width: {{ $totalKlien > 0 ? round(($klienAktif / $totalKlien) * 100) : 0 }}%"></div>
             </div>
-        </div>
+        </div>  
 
         <div>
             <div class="flex justify-between text-sm mb-1.5">
@@ -78,7 +78,7 @@
 <div class="rounded-xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-white/[0.03]">
     <div class="flex items-center justify-between px-5 py-4 border-b border-gray-100 dark:border-gray-800">
         <h3 class="text-sm font-semibold text-gray-800 dark:text-white/90">Klien Terbaru</h3>
-        <a href="{{ route('klien.index') }}" class="text-sm text-brand-500 hover:underline">Lihat semua →</a>
+        <a href="{{ route('klien.index') }}" class="text-sm text-brand-500      ">Lihat semua →</a>
     </div>
     <div class="overflow-x-auto">
         <table class="w-full text-sm">

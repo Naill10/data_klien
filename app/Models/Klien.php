@@ -12,6 +12,7 @@ class Klien extends Model
     protected $table = 'klien'; // ← ini yang penting!
 
     protected $fillable = [
+        'user_id',
         'nama_klien',
         'nama_perusahaan',
         'email',

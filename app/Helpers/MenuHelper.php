@@ -96,6 +96,11 @@ public static function getMenuGroups(): array
                     'path' => '/klien',
                     'icon' => 'table',
                 ],
+                   [
+                    'name' => 'Import Klien',  
+                    'path' => '/klien/import-page',
+                    'icon' => 'forms',
+                ],
             ],
         ],
     ];

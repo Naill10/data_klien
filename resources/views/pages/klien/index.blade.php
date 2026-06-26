@@ -101,11 +101,11 @@
         </table>
     </div>
 
-    {{-- Pagination --}}
-    @if ($klien->hasPages())
-        <div class="border-t border-gray-100 px-4 py-3 dark:border-gray-800">
-            {{ $klien->links() }}
-        </div>
-    @endif
+   {{-- Pagination --}}
+@if ($klien->hasPages())
+    <div class="border-t border-gray-100 px-4 py-3 dark:border-gray-800">
+        {{ $klien->appends(['search' => $search])->links() }}
+    </div>
+@endif
 </div>
 @endsection

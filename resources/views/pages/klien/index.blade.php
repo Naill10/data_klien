@@ -1,5 +1,6 @@
 @extends('layouts.app')
 
+
 @section('content')
 <div class="mb-6 flex items-center justify-between">
     <div>
@@ -63,7 +64,7 @@
                                     Aktif
                                 </span>
                             @else
-                                <span class="inline-flex rounded-full bg-red-100 px-2.5 py-0.5 text-xs font-medium text-red-700 dark:bg-red-900/30 dark:text-red-400">
+                               <span class="inline-flex whitespace-nowrap rounded-full bg-red-100 px-3 py-1 text-xs font-medium text-red-700 dark:bg-red-900/30 dark:text-red-400">
                                     Tidak Aktif
                                 </span>
                             @endif
